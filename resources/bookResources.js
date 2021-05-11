@@ -1,5 +1,5 @@
 const express = require("express");
-const { body, validationResult } = require("express-validator");
+const { body, validationResult, check } = require("express-validator");
 const BookResources = express.Router();
 
 const { BookControllers } = require("../controllers");
@@ -15,6 +15,7 @@ BookResources.post(
     min: 1455,
   }),
   body(["title", "publicationYear", "author", "tags"]).notEmpty(),
+  check('tags.*').isString(),
   BookControllers.createBook
 );
 
@@ -25,6 +26,7 @@ BookResources.put(
     min: 1455,
   }),
   body(["title", "publicationYear", "author", "tags"]).notEmpty(),
+  check('tags.*').isString(),
   BookControllers.updateBook
 );
 
