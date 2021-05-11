@@ -50,16 +50,41 @@ const createBook = (req, res) => {
     }
   });
 };
+
+const filterAuthor=(author,arr)=>{
+  if(author!==undefined){
+    let result =arr.filter(element=>element.author===author);
+    return result;
+  }
+  return arr;
+}
+const filterTitle=(title,arr)=>{
+  if(title!==undefined){
+    let result =arr.filter(element=>element.title===title);
+    return result;
+  }
+  return arr;
+}
+
+const filterYear=(year,arr)=>{
+  if(year!==undefined){
+    let result =arr.filter(element=>element.publicationYear==year);
+    return result;
+  }
+  return arr;
+}
 //TODO CHECK HOW TO SEND ARRAYS
 const getForParams=(req,res)=>{
   const {author,publicationYear,title,tags}=req.query;
-  let label = (tags)?JSON.parse(tags):[];
   //Book.getAll
-  
-
- 
-
-  res.send('OK')
+  Book.getAll((books)=>{
+    let byAuthor=filterAuthor(author,books);
+    let byTitle=filterTitle(title,byAuthor);
+    let filtered=filterYear(publicationYear,byTitle);
+    res.send({
+      values:filtered
+    })
+  })
 }
 
 //delete book
