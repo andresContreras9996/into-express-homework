@@ -52,9 +52,13 @@ const createBook = (req, res) => {
 };
 //TODO CHECK HOW TO SEND ARRAYS
 const getForParams=(req,res)=>{
-  const {author,publicationYear,title,tag}=req.query;
-  console.log(author,publicationYear,title,tag);
-  console.log(typeof tag)
+  const {author,publicationYear,title,tags}=req.query;
+  let label = (tags)?JSON.parse(tags):[];
+  //Book.getAll
+  
+
+ 
+
   res.send('OK')
 }
 

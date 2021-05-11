@@ -26,7 +26,7 @@ BookResources.put(
     min: 1455,
   }),
   body(["title", "publicationYear", "author", "tags"]).notEmpty(),
-  check('tags.*').isString(),
+  check('tags.*').isString().notEmpty(),
   BookControllers.updateBook
 );
 
